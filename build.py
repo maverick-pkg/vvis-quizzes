@@ -16,7 +16,7 @@ PAGE = """<!doctype html>
 <link rel="stylesheet" href="../assets/quiz.css">
 </head>
 <body>
-<header><div class="wrap top"><a href="https://vascularandveininstitute.com/"><img src="{logo}" alt="Vascular &amp; Vein Institute of the South"></a><a class="back" href="../">All self-check quizzes &rarr;</a></div></header>
+<header><div class="wrap top"><a href="https://vascularandveininstitute.com/"><img src="{logo}" alt="Vascular &amp; Vein Institute of the South"></a><a class="back" href="../">All quizzes &rarr;</a></div></header>
 <main class="wrap">
 <h1>{title}</h1>
 <p class="lead">{lead}</p>
