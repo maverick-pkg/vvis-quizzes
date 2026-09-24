@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Carotid Artery & Stroke Risk Check — Vascular &amp; Vein Institute of the South</title>
+<title>Carotid Artery &amp; Stroke Risk Check — Vascular &amp; Vein Institute of the South</title>
 <meta name="description" content="Nine-question carotid artery disease and stroke risk self-check. Instant result, no personal information collected.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Barlow+Semi+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
@@ -11,9 +11,9 @@
 <body>
 <header><div class="wrap top"><a href="https://vascularandveininstitute.com/"><img src="https://s43932.pcdn.co/wp-content/uploads/sites/190/2024/02/Flat-Horizontal-VVIS.png" alt="Vascular &amp; Vein Institute of the South"></a><a class="back" href="../">All self-check quizzes &rarr;</a></div></header>
 <main class="wrap">
-<h1>Carotid Artery & Stroke Risk Check</h1>
+<h1>Carotid Artery &amp; Stroke Risk Check</h1>
 <p class="lead">Nine quick questions. Your answers stay on your device — nothing is collected or stored.</p>
-<div id="vvis-quiz" class="vq" role="region" aria-label="Carotid Artery & Stroke Risk Check"><div class="vq-card"><div class="vq-progress" aria-hidden="true"><div class="vq-bar"></div></div><div class="vq-body"></div></div></div>
+<div id="vvis-quiz" class="vq" role="region" aria-label="Carotid Artery &amp; Stroke Risk Check"><div class="vq-card"><div class="vq-progress" aria-hidden="true"><div class="vq-bar"></div></div><div class="vq-body"></div></div></div>
 </main>
 <footer>Vascular &amp; Vein Institute of the South &middot; <a href="tel:+19013902930">901-390-2930</a> &middot; <a href="https://vascularandveininstitute.com/locations/">14 locations in Tennessee, Mississippi and Arkansas</a><br>These tools are educational and do not replace an examination by a physician.</footer>
 <script>
@@ -27,7 +27,12 @@ window.VVIS_QUIZ={id:'carotid_quiz',questions:[
  {q:'Has a parent or sibling had a stroke or mini-stroke?',help:'',opts:[['No or not sure',0],['Yes',1]]},
  {q:'Have you ever had a brief episode of weakness or numbness on one side, slurred speech, or a curtain-like loss of vision in one eye that went away?',help:'These can be warning strokes (TIAs).',opts:[['No',0],['Yes',4]],flag:'Temporary stroke-like symptoms are a warning sign that needs urgent evaluation, even if they resolved.'},
  {q:'Have you had a stroke before?',help:'',opts:[['No',0],['Yes',3]]}
-],result:function(r){ if(r.flags.length) return {tier:'high',label:'Urgent evaluation recommended',text:'Symptoms that come and go — one-sided weakness, slurred speech, or losing vision in one eye — can be warning strokes. If it is happening now, call 911. If it happened before, you need a carotid ultrasound and a physician visit within days, not weeks.',flags:r.flags,urgent:'Please call us today at '+r.PHONE+'.'}; if(r.score>=7) return {tier:'high',label:'Higher risk — a carotid ultrasound is worth doing',text:'Several of your answers are linked to narrowing of the carotid arteries, the main vessels that feed the brain. A carotid duplex ultrasound is quick, painless and shows whether plaque is building up. Knowing early lets us lower your stroke risk with medication, lifestyle changes and, when needed, a procedure.'}; if(r.score>=3) return {tier:'mod',label:'Some risk factors present',text:'You have risk factors for carotid disease and stroke. Controlling blood pressure, cholesterol and blood sugar and staying tobacco-free matter most. If you are 65 or older with two or more of these, a screening ultrasound is reasonable — ask us.'}; return {tier:'low',label:'Lower risk right now',text:'Your answers suggest a lower likelihood of carotid disease. Keep blood pressure and cholesterol in check and stay active. Learn the stroke warning signs — face drooping, arm weakness, speech difficulty — and call 911 immediately if they appear.'}; },disclaimer:'This quiz is an educational screening tool, not a diagnosis. A carotid ultrasound is needed to detect artery narrowing.'};
+],result:function(r){
+ if(r.flags.length) return {tier:'high',label:'Urgent evaluation recommended',text:'Symptoms that come and go — one-sided weakness, slurred speech, or losing vision in one eye — can be warning strokes. If it is happening now, call 911. If it happened before, you need a carotid ultrasound and a physician visit within days, not weeks.',flags:r.flags,urgent:'Please call us today at '+r.PHONE+'.'};
+ if(r.score>=7) return {tier:'high',label:'Higher risk — a carotid ultrasound is worth doing',text:'Several of your answers are linked to narrowing of the carotid arteries, the main vessels that feed the brain. A carotid duplex ultrasound is quick, painless and shows whether plaque is building up. Knowing early lets us lower your stroke risk with medication, lifestyle changes and, when needed, a procedure.'};
+ if(r.score>=3) return {tier:'mod',label:'Some risk factors present',text:'You have risk factors for carotid disease and stroke. Controlling blood pressure, cholesterol and blood sugar and staying tobacco-free matter most. Whether a screening ultrasound makes sense depends on how many risk factors you carry — ask us.'};
+ return {tier:'low',label:'Lower risk right now',text:'Your answers suggest a lower likelihood of carotid disease. Keep blood pressure and cholesterol in check and stay active. Learn the stroke warning signs — face drooping, arm weakness, speech difficulty — and call 911 immediately if they appear.'};
+},disclaimer:'This quiz is an educational screening tool, not a diagnosis. A carotid ultrasound is needed to detect artery narrowing.'};
 </script>
 <script src="../assets/quiz.js"></script>
 </body>
