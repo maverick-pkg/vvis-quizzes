@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fibroids: Is UFE Right for Me? — Vascular &amp; Vein Institute of the South</title>
+<meta name="description" content="Six-question self-check on whether uterine fibroid embolization (UFE), a non-surgical fibroid treatment, may be an option. Instant result, no personal information collected.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Barlow+Semi+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/quiz.css">
+</head>
+<body>
+<header><div class="wrap top"><a href="https://vascularandveininstitute.com/"><img src="https://s43932.pcdn.co/wp-content/uploads/sites/190/2024/02/Flat-Horizontal-VVIS.png" alt="Vascular &amp; Vein Institute of the South"></a><a class="back" href="../">All self-check quizzes &rarr;</a></div></header>
+<main class="wrap">
+<h1>Fibroids: Is UFE Right for Me?</h1>
+<p class="lead">Six questions about your symptoms and situation. Your answers stay on your device — nothing is collected or stored.</p>
+<div id="vvis-quiz" class="vq" role="region" aria-label="Fibroids: Is UFE Right for Me?"><div class="vq-card"><div class="vq-progress" aria-hidden="true"><div class="vq-bar"></div></div><div class="vq-body"></div></div></div>
+</main>
+<footer>Vascular &amp; Vein Institute of the South &middot; <a href="tel:+19013902930">901-390-2930</a> &middot; <a href="https://vascularandveininstitute.com/locations/">14 locations in Tennessee, Mississippi and Arkansas</a><br>These tools are educational and do not replace an examination by a physician.</footer>
+<script>
+window.VVIS_QUIZ={id:'ufe_quiz',questions:[
+ {q:'Have you been told you have uterine fibroids?',help:'',opts:[['Yes, diagnosed by ultrasound or MRI',2],['Not sure, but I have symptoms',1],['No',0]]},
+ {q:'Which of these do you experience? Choose all that apply.',help:'',multi:true,opts:[['Heavy periods (soaking through pads or passing clots)',2],['Periods lasting more than 7 days',1],['Pelvic pressure, fullness or a growing belly',1],['Needing to urinate often, or trouble emptying',1],['Pain during sex, or lower back and leg pain',1],['Fatigue or anemia from blood loss',2],['None of these',0,'none']]},
+ {q:'Are you pregnant now, or hoping to become pregnant in the next year?',help:'',opts:[['No',0],['Yes',0]]},
+ {q:'Have you gone through menopause?',help:'',opts:[['No',0],['Yes',0]]},
+ {q:'What treatments have you tried for fibroid symptoms?',help:'',opts:[['None yet',0],['Medication or a hormonal IUD, without enough relief',1],['I have been offered surgery (hysterectomy or myomectomy)',2]]},
+ {q:'How important is it to you to avoid surgery and keep your uterus?',help:'',opts:[['Very important',1],['Somewhat',0],['Not a priority',0]]}
+],result:function(r){ var preg=r.chosen(2,'Yes'), meno=r.chosen(3,'Yes'), dx=r.value(0), sym=r.value(1); if(preg) return {tier:'info',label:'Talk with us before choosing a fibroid treatment',text:'UFE is generally not recommended for women who are pregnant or planning a pregnancy soon, because its effect on future fertility is still being studied. There are other fibroid options, and the right one depends on your goals — a consultation can lay them out.'}; if(meno&&sym>0) return {tier:'info',label:'New symptoms after menopause need a prompt evaluation',text:'Fibroids usually shrink after menopause, so new bleeding or pelvic symptoms should be evaluated by a physician promptly to rule out other causes before any fibroid treatment is considered.'}; if(dx===2&&sym>=2) return {tier:'high',label:'You may be a good candidate for UFE',text:'You have diagnosed fibroids with the kind of symptoms UFE treats well. UFE is a non-surgical, outpatient procedure: a tiny catheter blocks the arteries feeding the fibroids, which then shrink over the following months. Most women go home the same day and keep their uterus. A consultation with imaging confirms whether your fibroids are suited to it.'}; if(sym>=2) return {tier:'mod',label:'Worth an evaluation',text:'Your symptoms are typical of fibroids. The next step is a pelvic ultrasound or MRI to confirm the diagnosis and measure the fibroids — then we can tell you whether UFE, medication or surgery fits best.'}; return {tier:'low',label:'UFE is probably not the first step right now',text:'Without a fibroid diagnosis or significant symptoms, there is nothing to treat yet. If heavy periods, pelvic pressure or urinary changes develop, an ultrasound is the place to start.'}; },disclaimer:'This quiz is an educational screening tool, not a diagnosis. Imaging and a consultation determine whether UFE is appropriate.'};
+</script>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

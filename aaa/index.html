@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aortic Aneurysm Screening: Do I Qualify? — Vascular &amp; Vein Institute of the South</title>
+<meta name="description" content="Five-question check on whether you meet the recommendation for a one-time abdominal aortic aneurysm (AAA) screening ultrasound. Instant result, no personal information collected.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Barlow+Semi+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/quiz.css">
+</head>
+<body>
+<header><div class="wrap top"><a href="https://vascularandveininstitute.com/"><img src="https://s43932.pcdn.co/wp-content/uploads/sites/190/2024/02/Flat-Horizontal-VVIS.png" alt="Vascular &amp; Vein Institute of the South"></a><a class="back" href="../">All self-check quizzes &rarr;</a></div></header>
+<main class="wrap">
+<h1>Aortic Aneurysm Screening: Do I Qualify?</h1>
+<p class="lead">Five questions. A one-time screening ultrasound is quick, painless and covered by Medicare for people who qualify.</p>
+<div id="vvis-quiz" class="vq" role="region" aria-label="Aortic Aneurysm Screening: Do I Qualify?"><div class="vq-card"><div class="vq-progress" aria-hidden="true"><div class="vq-bar"></div></div><div class="vq-body"></div></div></div>
+</main>
+<footer>Vascular &amp; Vein Institute of the South &middot; <a href="tel:+19013902930">901-390-2930</a> &middot; <a href="https://vascularandveininstitute.com/locations/">14 locations in Tennessee, Mississippi and Arkansas</a><br>These tools are educational and do not replace an examination by a physician.</footer>
+<script>
+window.VVIS_QUIZ={id:'aaa_quiz',questions:[
+ {q:'How old are you?',help:'',opts:[['Under 60',0],['60 to 64',1],['65 to 75',2],['Over 75',1]]},
+ {q:'What was your sex at birth?',help:'Screening recommendations differ for men and women.',opts:[['Male',1],['Female',0]]},
+ {q:'Have you smoked at least 100 cigarettes in your lifetime?',help:'Even if you quit long ago.',opts:[['No',0],['Yes',2]]},
+ {q:'Has a parent, brother or sister had an aortic aneurysm?',help:'',opts:[['No or not sure',0],['Yes',3]]},
+ {q:'Do you have high blood pressure, or known artery disease (PAD, carotid disease or heart disease)?',help:'',opts:[['No',0],['Yes',1]]}
+],result:function(r){ var age=r.value(0), male=r.chosen(1,'Male'), smoked=r.chosen(2,'Yes'), fam=r.chosen(3,'Yes'); if(male&&age===2&&smoked) return {tier:'high',label:'You meet the standard screening recommendation',text:'Men aged 65 to 75 who have ever smoked are recommended to have a one-time abdominal ultrasound to check for an aortic aneurysm. It takes about 15 minutes, uses no needles or radiation, and Medicare covers a one-time screening with a referral. Most people who are screened are reassured; the few who are not get watched or treated before the aneurysm becomes dangerous.',cta1:'Schedule a screening'}; if(fam&&age>=1) return {tier:'high',label:'Screening is recommended because of your family history',text:'A parent or sibling with an aortic aneurysm raises your own risk, and screening is recommended for close relatives regardless of smoking history. A one-time ultrasound is quick and painless, and Medicare covers it with a referral for people with a family history.',cta1:'Schedule a screening'}; if(age===2&&smoked) return {tier:'mod',label:'Screening is worth discussing',text:'For women aged 65 to 75 who have smoked, the guidelines leave the decision to you and your physician. If you also have high blood pressure or other artery disease, a one-time ultrasound is reasonable — let us talk it through with you.'}; if(age===1&&smoked) return {tier:'mod',label:'You will reach screening age soon',text:'The standard recommendation begins at 65 for men who have ever smoked. Plan on a one-time ultrasound then — or sooner if you have a family history or develop unexplained abdominal or back pain.'}; return {tier:'low',label:'Routine screening is not recommended for you right now',text:'Based on your answers, guidelines do not call for AAA screening at this time. That can change with age or a new family history, so revisit this check periodically. Sudden severe abdominal or back pain with dizziness is an emergency — call 911.'}; },disclaimer:'This quiz reflects general screening guidelines (U.S. Preventive Services Task Force) and Medicare coverage rules; it is not a diagnosis.'};
+</script>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
