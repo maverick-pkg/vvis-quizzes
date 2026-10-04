@@ -28,8 +28,8 @@
   function chosen(k,label){ var q=Q[k], a=answers[k]; if(q.multi) return (a||[]).some(function(idx){return q.opts[idx][0]===label;}); var o=q.opts[a]; return !!o && o[0]===label; }
   function result(){
     var ctx={value:value, chosen:chosen, PHONE:PHONE};
-    var score=0, flags=[]; Q.forEach(function(q,k){ var v=value(k); score+=v; if(q.flag && v>=(q.flagAt||4)) flags.push(q.flag); });
-    var r=cfg.result({score:score, flags:flags, value:value, chosen:chosen});
+    var score=0, flags=[], hardFlags=[]; Q.forEach(function(q,k){ var v=value(k); score+=v; if(q.flag && v>=(q.flagAt||4)){ flags.push(q.flag); if(!q.soft) hardFlags.push(q.flag); } });
+    var r=cfg.result({score:score, flags:flags, hardFlags:hardFlags, value:value, chosen:chosen, PHONE:PHONE});
     clear(body); bar.style.width='100%';
     var wrap=el('div','vq-result'); wrap.setAttribute('role','status');
     wrap.appendChild(el('span','vq-tier '+r.tier,r.label)); wrap.appendChild(el('h3',null,'Your result')); wrap.appendChild(el('p',null,r.text));
