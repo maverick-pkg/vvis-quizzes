@@ -2,9 +2,11 @@
 """Generates every quiz page + the hub from the QUIZZES table. Run: python3 build.py  (then node --check is run by test.sh)."""
 import os, pathlib, html
 ROOT = pathlib.Path(__file__).parent
+import hashlib
+ASSET_V = hashlib.sha1((ROOT / "assets/quiz.js").read_bytes() + (ROOT / "assets/quiz.css").read_bytes()).hexdigest()[:8]
 LOGO = "https://s43932.pcdn.co/wp-content/uploads/sites/190/2024/02/Flat-Horizontal-VVIS.png"
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Barlow+Semi+Condensed:wght@400;500;600&display=swap" rel="stylesheet">'
-FOOTER = '<footer>Vascular &amp; Vein Institute of the South &middot; <a href="tel:+19013902930">901-390-2930</a> &middot; <a href="https://vascularandveininstitute.com/locations/">Offices in Tennessee, Mississippi and Arkansas</a> &middot; <a href="https://vascularandveininstitute.com/privacy-policy/">Privacy policy</a><br>These tools are educational and do not replace an examination by a physician.</footer>'
+FOOTER = '<footer>Vascular &amp; Vein Institute of the South &middot; <a href="tel:+19013902930">901-390-2930</a> &middot; <a href="https://vascularandveininstitute.com/locations/">Offices in Tennessee, Mississippi and Arkansas</a> &middot; <a href="https://vascularandveininstitute.com/privacy-policy/">Privacy policy</a><br>These tools are educational and do not replace an examination by a doctor.</footer>'
 
 PAGE = """<!doctype html>
 <html lang="en">
@@ -14,7 +16,7 @@ PAGE = """<!doctype html>
 <meta name="description" content="{description}">
 <meta name="robots" content="noindex,follow">{canonical}
 {fonts}
-<link rel="stylesheet" href="../assets/quiz.css">
+<link rel="stylesheet" href="../assets/quiz.css?v={assetv}">
 </head>
 <body>
 <header><div class="wrap top"><a href="https://vascularandveininstitute.com/"><img src="{logo}" alt="Vascular &amp; Vein Institute of the South"></a><a class="back" href="../">All quizzes &rarr;</a></div></header>
@@ -27,7 +29,7 @@ PAGE = """<!doctype html>
 <script>
 {config}
 </script>
-<script src="../assets/quiz.js"></script>
+<script src="../assets/quiz.js?v={assetv}"></script>
 </body>
 </html>
 """
@@ -163,7 +165,7 @@ dict(slug="carotid", title="Carotid Artery & Stroke Risk Check", hub="Carotid ar
 for q in QUIZZES:
     d = ROOT / q["slug"]; d.mkdir(exist_ok=True)
     can = f'\n<link rel="canonical" href="{q["canonical"]}">' if q.get("canonical") else ""
-    (d / "index.html").write_text(PAGE.format(title=html.escape(q["title"], quote=False).replace("&amp;", "&amp;"), description=html.escape(q["description"], quote=True), canonical=can, fonts=FONTS, logo=LOGO, lead=q["lead"], config=q["config"], footer=FOOTER), encoding="utf8")
+    (d / "index.html").write_text(PAGE.format(title=html.escape(q["title"], quote=False).replace("&amp;", "&amp;"), description=html.escape(q["description"], quote=True), canonical=can, fonts=FONTS, logo=LOGO, lead=q["lead"], config=q["config"], footer=FOOTER, assetv=ASSET_V), encoding="utf8")
 
 cards = "\n".join(f'<a href="{q["slug"]}/"><h3>{q["hub"]}</h3><p>{q["blurb"]}</p></a>' for q in QUIZZES)
 HUB = f"""<!doctype html>
@@ -174,7 +176,7 @@ HUB = f"""<!doctype html>
 <meta name="robots" content="noindex,follow">
 <meta name="description" content="Free two-minute self-checks from Vascular &amp; Vein Institute of the South: PAD, vein health, fibroids/UFE, aortic aneurysm screening, knee pain/GAE, carotid and stroke risk. No personal information collected.">
 {FONTS}
-<link rel="stylesheet" href="assets/quiz.css">
+<link rel="stylesheet" href="assets/quiz.css?v={ASSET_V}">
 </head>
 <body>
 <header><div class="wrap top"><a href="https://vascularandveininstitute.com/"><img src="{LOGO}" alt="Vascular &amp; Vein Institute of the South"></a><a class="back" href="https://vascularandveininstitute.com/">Back to our website &rarr;</a></div></header>
