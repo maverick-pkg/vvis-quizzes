@@ -4,6 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Peripheral Artery Disease Risk Quiz — Vascular &amp; Vein Institute of the South</title>
 <meta name="description" content="Ten-question peripheral artery disease (PAD) risk self-check from the vascular surgeons of Vascular &amp; Vein Institute of the South. Instant result, no personal information collected.">
+<meta name="robots" content="noindex,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Barlow+Semi+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/quiz.css">
@@ -15,9 +16,9 @@
 <p class="lead">Ten quick questions about your legs and your health. Your answers stay on your device — nothing is collected or stored.</p>
 <div id="vvis-quiz" class="vq" role="region" aria-label="Peripheral Artery Disease Risk Quiz"><div class="vq-card"><div class="vq-progress" aria-hidden="true"><div class="vq-bar"></div></div><div class="vq-body"></div></div></div>
 </main>
-<footer>Vascular &amp; Vein Institute of the South &middot; <a href="tel:+19013902930">901-390-2930</a> &middot; <a href="https://vascularandveininstitute.com/locations/">14 locations in Tennessee, Mississippi and Arkansas</a><br>These tools are educational and do not replace an examination by a physician.</footer>
+<footer>Vascular &amp; Vein Institute of the South &middot; <a href="tel:+19013902930">901-390-2930</a> &middot; <a href="https://vascularandveininstitute.com/locations/">Offices in Tennessee, Mississippi and Arkansas</a> &middot; <a href="https://vascularandveininstitute.com/privacy-policy/">Privacy policy</a><br>These tools are educational and do not replace an examination by a physician.</footer>
 <script>
-window.VVIS_QUIZ={id:'pad_quiz',questions:[
+window.VVIS_QUIZ={id:'pad_quiz',learn:{label:'peripheral artery disease',url:'https://vascularandveininstitute.com/services/peripheral-arterial-disease/'},questions:[
  {q:'How old are you?',help:'Risk rises with age, especially after 65.',opts:[['Under 50',0],['50 to 64',1],['65 or older',2]]},
  {q:'Do you smoke, or have you smoked in the past?',help:'Smoking is the single strongest risk factor for PAD.',opts:[['Never smoked',0],['Former smoker',1],['Current smoker',3]]},
  {q:'Have you been diagnosed with diabetes?',help:'',opts:[['No',0],['Yes',2]]},
@@ -29,7 +30,7 @@ window.VVIS_QUIZ={id:'pad_quiz',questions:[
  {q:'Is one foot or leg colder, paler or more discolored than the other, or do you have numbness or hair loss on your lower legs?',help:'',opts:[['No',0],['Yes',2]]},
  {q:'Has a parent or sibling had PAD, an aneurysm, a heart attack or a stroke before age 65?',help:'',opts:[['No or not sure',0],['Yes',1]]}
 ],result:function(r){
- if(r.flags.length||r.score>=7) return {tier:'high',label:'Higher likelihood of PAD',text:'Your answers include signs that are commonly linked to reduced blood flow in the legs. This is worth evaluating soon rather than watching. The first test is simple and painless — a blood-pressure comparison between your arm and ankle (an ankle-brachial index) plus an ultrasound in our office.',flags:r.flags,urgent:r.flags.length?'Please call us today at '+r.PHONE+' so we can see you quickly.':null};
+ if(r.flags.length||r.score>=7) return {tier:'high',label:'Higher likelihood of PAD',text:'Your answers include signs that are commonly linked to reduced blood flow in the legs. This is worth evaluating soon rather than watching. The first test is simple and painless — a blood-pressure comparison between your arm and ankle (an ankle-brachial index) plus an ultrasound in our office.',flags:r.flags,urgent:r.flags.length?'Please call us today at '+r.PHONE+' so we can see you quickly.':null,learn:r.flags.length?{label:'limb preservation',url:'https://vascularandveininstitute.com/services/limb-preservation/'}:null};
  if(r.score>=3) return {tier:'mod',label:'Some risk factors present',text:'You have risk factors that make PAD more likely, even if you have few symptoms today. A short vascular evaluation can tell you where you stand and what to do about it — often before any damage is done.'};
  return {tier:'low',label:'Lower likelihood of PAD',text:'Your answers suggest a lower likelihood of PAD right now. Keep it that way: stay active, avoid tobacco, and manage blood pressure, cholesterol and blood sugar. If you develop leg pain when walking, sores on your feet that will not heal, or a cold or discolored foot, get checked.'};
 },disclaimer:'This quiz is an educational screening tool, not a diagnosis. Only an examination can confirm or rule out peripheral artery disease. If you have sudden severe leg pain, a cold pale leg, or chest pain, call 911.'};

@@ -35,8 +35,15 @@
     wrap.appendChild(el('span','vq-tier '+r.tier,r.label)); wrap.appendChild(el('h3',null,'Your result')); wrap.appendChild(el('p',null,r.text));
     var fl=r.flags||flags; if(fl.length){ var ul=el('ul','vq-flags'); fl.forEach(function(f){ul.appendChild(el('li',null,f));}); wrap.appendChild(ul); }
     if(r.urgent){ var up=el('p'); up.appendChild(el('strong',null,r.urgent)); wrap.appendChild(up); }
-    var cta=el('div','vq-cta'); var a1=el('a','vq-btn',r.cta1||'Schedule online'); a1.href=r.cta1url||PHREESIA; var a2=el('a','vq-btn alt','Call '+PHONE); a2.href=TEL; cta.appendChild(a1); cta.appendChild(a2); wrap.appendChild(cta);
-    wrap.appendChild(el('p','vq-disc',(cfg.disclaimer||'This quiz is an educational screening tool, not a diagnosis. Only an examination can confirm what is going on.')+' If you have sudden severe symptoms, call 911. Your answers stay in your browser and are not sent to us.'));
+    var callFirst = !!r.urgent || !!r.callFirst;
+    var sched=el('a','vq-btn'+(callFirst?' alt':''), r.cta1||(r.callFirst?'Schedule a visit after you have been seen':'Schedule online')); sched.href=r.cta1url||PHREESIA;
+    var call=el('a','vq-btn'+(callFirst?'':' alt'),'Call '+PHONE); call.href=TEL;
+    var cta=el('div','vq-cta'); if(callFirst){ cta.appendChild(call); cta.appendChild(sched); } else { cta.appendChild(sched); cta.appendChild(call); }
+    if(r.call911){ var e911=el('a','vq-btn alt','Call 911'); e911.href='tel:911'; cta.appendChild(e911); }
+    wrap.appendChild(cta);
+    var L=r.learn||cfg.learn; if(L){ var lm=el('p','vq-learn'); var la=el('a',null,'Learn more about '+L.label); la.href=L.url; lm.appendChild(la); wrap.appendChild(lm); }
+    var disc=(cfg.disclaimer||'This quiz is an educational screening tool, not a diagnosis. Only an examination can confirm what is going on.'); if(disc.indexOf('911')<0) disc+=' If you have sudden severe symptoms, call 911.'; disc+=' Using this tool does not create a doctor-patient relationship. Your answers stay in your browser and are not sent to us.';
+    wrap.appendChild(el('p','vq-disc',disc));
     var rp=el('p'); var rs=el('button','vq-restart','Start over'); rs.type='button'; rs.addEventListener('click',function(){answers=[];i=0;render();}); rp.appendChild(rs); wrap.appendChild(rp);
     body.appendChild(wrap);
     try{ if(typeof gtag==='function') gtag('event',(cfg.id||'quiz')+'_complete',{risk_tier:r.tier}); }catch(e){}

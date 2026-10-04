@@ -4,6 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Knee Pain: Could Genicular Artery Embolization Help? — Vascular &amp; Vein Institute of the South</title>
 <meta name="description" content="Seven-question check on whether genicular artery embolization (GAE), a minimally invasive treatment for knee osteoarthritis pain, may be an option. Instant result, no personal information collected.">
+<meta name="robots" content="noindex,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Barlow+Semi+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/quiz.css">
@@ -15,9 +16,9 @@
 <p class="lead">Seven questions about your knee. Your answers stay on your device — nothing is collected or stored.</p>
 <div id="vvis-quiz" class="vq" role="region" aria-label="Knee Pain: Could Genicular Artery Embolization Help?"><div class="vq-card"><div class="vq-progress" aria-hidden="true"><div class="vq-bar"></div></div><div class="vq-body"></div></div></div>
 </main>
-<footer>Vascular &amp; Vein Institute of the South &middot; <a href="tel:+19013902930">901-390-2930</a> &middot; <a href="https://vascularandveininstitute.com/locations/">14 locations in Tennessee, Mississippi and Arkansas</a><br>These tools are educational and do not replace an examination by a physician.</footer>
+<footer>Vascular &amp; Vein Institute of the South &middot; <a href="tel:+19013902930">901-390-2930</a> &middot; <a href="https://vascularandveininstitute.com/locations/">Offices in Tennessee, Mississippi and Arkansas</a> &middot; <a href="https://vascularandveininstitute.com/privacy-policy/">Privacy policy</a><br>These tools are educational and do not replace an examination by a physician.</footer>
 <script>
-window.VVIS_QUIZ={id:'gae_quiz',questions:[
+window.VVIS_QUIZ={id:'gae_quiz',learn:{label:'genicular artery embolization',url:'https://vascularandveininstitute.com/services/genicular-artery-embolization/'},questions:[
  {q:'Has a doctor told you that you have osteoarthritis (wear-and-tear arthritis) in this knee?',help:'Usually confirmed on an X-ray or MRI.',opts:[['Yes',2],['Not sure',1],['No',0]]},
  {q:'How long has the knee hurt?',help:'',opts:[['Less than 3 months',0],['3 to 6 months',1],['More than 6 months',2]]},
  {q:'On most days, how bad is the pain?',help:'',opts:[['Mild',0],['Moderate — limits some activities',1],['Severe — limits walking, stairs or sleep',2]]},
@@ -27,7 +28,7 @@ window.VVIS_QUIZ={id:'gae_quiz',questions:[
  {q:'Is the knee red, hot and swollen right now, or have you had a fever with it?',help:'',opts:[['No',0],['Yes',0]]}
 ],result:function(r){
  var replaced=r.chosen(4,'I have already had a replacement on this knee'), infect=r.chosen(6,'Yes'), oa=r.value(0), dur=r.value(1), tried=r.value(3), contrast=r.chosen(5,'Yes');
- if(infect) return {tier:'info',label:'A hot, swollen knee needs prompt medical attention',text:'Redness, heat and swelling — especially with fever — can mean infection or an inflammatory flare rather than arthritis wear. Please see a physician promptly before considering any elective procedure.'};
+ if(infect) return {tier:'info',label:'A hot, swollen knee needs prompt medical attention',text:'Redness, heat and swelling — especially with fever — can mean infection or an inflammatory flare rather than arthritis wear. Please see a doctor promptly before considering any elective procedure.',callFirst:true};
  if(replaced) return {tier:'info',label:'GAE is not designed for a replaced knee',text:'Genicular artery embolization treats pain from the inflamed lining of an arthritic knee joint. Pain after a knee replacement has different causes and should be evaluated by your orthopedic surgeon.'};
  if(oa===2&&dur>=1&&tried>=1) return {tier:'high',label:'You may be a candidate for GAE',text:'You have diagnosed knee osteoarthritis, lasting pain, and have already tried conservative care — the situation GAE was developed for. GAE is a newer, minimally invasive outpatient procedure that reduces blood flow to the inflamed joint lining. Early studies report pain relief for many patients, but results in controlled trials have been mixed and it is not right for everyone. A consultation reviews your imaging and whether it fits your knee.'+(contrast?' Your contrast allergy or kidney history will be part of that planning.':'')};
  if(oa>=1&&dur>=1) return {tier:'mod',label:'Worth a conversation',text:'Your knee pain has lasted long enough to take seriously. If osteoarthritis is confirmed on imaging, the usual path is physical therapy, medication or injections first; GAE is an option to discuss when those have not done enough. We can help you sort the sequence.'};
