@@ -5,8 +5,10 @@
   var Q=cfg.questions, answers=[], i=0, body=root.querySelector('.vq-body'), bar=root.querySelector('.vq-bar');
   function el(tag,cls,text){var e=document.createElement(tag); if(cls) e.className=cls; if(text!==undefined) e.textContent=text; return e;}
   function clear(n){while(n.firstChild) n.removeChild(n.firstChild);}
+  var started=false;
   function render(){
     bar.style.width=Math.round(i/Q.length*100)+'%';
+    if(i>0&&!started){ started=true; try{ if(typeof gtag==='function') gtag('event','quiz_start',{quiz:(cfg.id||'quiz').replace(/_quiz$/,'')}); }catch(e){} }
     if(i>=Q.length) return result();
     var q=Q[i]; clear(body);
     body.appendChild(el('div','vq-step','Question '+(i+1)+' of '+Q.length));
@@ -36,8 +38,8 @@
     var fl=r.flags||flags; if(fl.length){ var ul=el('ul','vq-flags'); fl.forEach(function(f){ul.appendChild(el('li',null,f));}); wrap.appendChild(ul); }
     if(r.urgent){ var up=el('p'); up.appendChild(el('strong',null,r.urgent)); wrap.appendChild(up); }
     var callFirst = !!r.urgent || !!r.callFirst;
-    var sched=el('a','vq-btn'+(callFirst?' alt':''), r.cta1||(r.callFirst?'Schedule a visit after you have been seen':'Schedule online')); sched.href=r.cta1url||PHREESIA;
-    var call=el('a','vq-btn'+(callFirst?'':' alt'),'Call '+PHONE); call.href=TEL;
+    var qid=(cfg.id||'quiz').replace(/_quiz$/,''); var sched=el('a','vq-btn'+(callFirst?' alt':''), r.cta1||(r.callFirst?'Schedule a visit after you have been seen':'Schedule online')); sched.href=r.cta1url||(PHREESIA+'?utm_source=vvis-quizzes&utm_medium=web&utm_campaign='+encodeURIComponent(qid)+'&utm_content='+encodeURIComponent(r.tier||'')); sched.addEventListener('click',function(){ try{ if(typeof gtag==='function') gtag('event','quiz_schedule_click',{quiz:qid,risk_tier:r.tier}); }catch(e){} });
+    var call=el('a','vq-btn'+(callFirst?'':' alt'),'Call '+PHONE); call.href=TEL; call.addEventListener('click',function(){ try{ if(typeof gtag==='function') gtag('event','quiz_call_click',{quiz:qid,risk_tier:r.tier}); }catch(e){} });
     var cta=el('div','vq-cta'); if(callFirst){ cta.appendChild(call); cta.appendChild(sched); } else { cta.appendChild(sched); cta.appendChild(call); }
     if(r.call911){ var e911=el('a','vq-btn alt','Call 911'); e911.href='tel:911'; cta.appendChild(e911); }
     wrap.appendChild(cta);
@@ -46,7 +48,7 @@
     wrap.appendChild(el('p','vq-disc',disc));
     var rp=el('p'); var rs=el('button','vq-restart','Start over'); rs.type='button'; rs.addEventListener('click',function(){answers=[];i=0;render();}); rp.appendChild(rs); wrap.appendChild(rp);
     body.appendChild(wrap);
-    try{ if(typeof gtag==='function') gtag('event',(cfg.id||'quiz')+'_complete',{risk_tier:r.tier}); }catch(e){}
+    try{ if(typeof gtag==='function'){ gtag('event','quiz_complete',{quiz:qid,risk_tier:r.tier}); gtag('event',(cfg.id||'quiz')+'_complete',{risk_tier:r.tier}); } }catch(e){}
   }
   render();
 })();

@@ -6,6 +6,8 @@ import hashlib
 ASSET_V = hashlib.sha1((ROOT / "assets/quiz.js").read_bytes() + (ROOT / "assets/quiz.css").read_bytes()).hexdigest()[:8]
 SITE = "https://quizzes.vascularandveininstitute.com"
 LOGO = "https://s43932.pcdn.co/wp-content/uploads/sites/190/2024/02/Flat-Horizontal-VVIS.png"
+GTAG = """<script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZE1C5G5HF"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4ZE1C5G5HF',{anonymize_ip:true});gtag('config','G-PLLM37NGV1',{anonymize_ip:true});</script>"""
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Barlow+Semi+Condensed:wght@400;500;600&display=swap" rel="stylesheet">'
 FOOTER = '<footer>Vascular &amp; Vein Institute of the South &middot; <a href="tel:+19013902930">901-390-2930</a> &middot; <a href="https://vascularandveininstitute.com/locations/">Offices in Tennessee, Mississippi and Arkansas</a> &middot; <a href="https://vascularandveininstitute.com/privacy-policy/">Privacy policy</a><br>These tools are educational and do not replace an examination by a doctor.</footer>'
 
@@ -17,6 +19,7 @@ PAGE = """<!doctype html>
 <meta name="description" content="{description}">
 <meta name="robots" content="index,follow">{canonical}
 {fonts}
+{gtag}
 <link rel="stylesheet" href="../assets/quiz.css?v={assetv}">
 </head>
 <body>
@@ -166,7 +169,7 @@ dict(slug="carotid", title="Carotid Artery & Stroke Risk Check", hub="Carotid ar
 for q in QUIZZES:
     d = ROOT / q["slug"]; d.mkdir(exist_ok=True)
     can = f'\n<link rel="canonical" href="{q.get("canonical") or (SITE + "/" + q["slug"] + "/")}">'
-    (d / "index.html").write_text(PAGE.format(title=html.escape(q["title"], quote=False).replace("&amp;", "&amp;"), description=html.escape(q["description"], quote=True), canonical=can, fonts=FONTS, logo=LOGO, lead=q["lead"], config=q["config"], footer=FOOTER, assetv=ASSET_V), encoding="utf8")
+    (d / "index.html").write_text(PAGE.format(title=html.escape(q["title"], quote=False).replace("&amp;", "&amp;"), description=html.escape(q["description"], quote=True), canonical=can, fonts=FONTS, gtag=GTAG, logo=LOGO, lead=q["lead"], config=q["config"], footer=FOOTER, assetv=ASSET_V), encoding="utf8")
 
 cards = "\n".join(f'<a href="{q["slug"]}/"><h3>{q["hub"]}</h3><p>{q["blurb"]}</p></a>' for q in QUIZZES)
 HUB = f"""<!doctype html>
@@ -178,6 +181,7 @@ HUB = f"""<!doctype html>
 <link rel="canonical" href="{SITE}/">
 <meta name="description" content="Free two-minute self-checks from Vascular &amp; Vein Institute of the South: PAD, vein health, fibroids/UFE, aortic aneurysm screening, knee pain/GAE, carotid and stroke risk. No personal information collected.">
 {FONTS}
+{GTAG}
 <link rel="stylesheet" href="assets/quiz.css?v={ASSET_V}">
 </head>
 <body>
