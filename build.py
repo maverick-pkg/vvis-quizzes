@@ -4,6 +4,7 @@ import os, pathlib, html
 ROOT = pathlib.Path(__file__).parent
 import hashlib
 ASSET_V = hashlib.sha1((ROOT / "assets/quiz.js").read_bytes() + (ROOT / "assets/quiz.css").read_bytes()).hexdigest()[:8]
+SITE = "https://quizzes.vascularandveininstitute.com"
 LOGO = "https://s43932.pcdn.co/wp-content/uploads/sites/190/2024/02/Flat-Horizontal-VVIS.png"
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Barlow+Semi+Condensed:wght@400;500;600&display=swap" rel="stylesheet">'
 FOOTER = '<footer>Vascular &amp; Vein Institute of the South &middot; <a href="tel:+19013902930">901-390-2930</a> &middot; <a href="https://vascularandveininstitute.com/locations/">Offices in Tennessee, Mississippi and Arkansas</a> &middot; <a href="https://vascularandveininstitute.com/privacy-policy/">Privacy policy</a><br>These tools are educational and do not replace an examination by a doctor.</footer>'
@@ -14,7 +15,7 @@ PAGE = """<!doctype html>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} — Vascular &amp; Vein Institute of the South</title>
 <meta name="description" content="{description}">
-<meta name="robots" content="noindex,follow">{canonical}
+<meta name="robots" content="index,follow">{canonical}
 {fonts}
 <link rel="stylesheet" href="../assets/quiz.css?v={assetv}">
 </head>
@@ -164,7 +165,7 @@ dict(slug="carotid", title="Carotid Artery & Stroke Risk Check", hub="Carotid ar
 
 for q in QUIZZES:
     d = ROOT / q["slug"]; d.mkdir(exist_ok=True)
-    can = f'\n<link rel="canonical" href="{q["canonical"]}">' if q.get("canonical") else ""
+    can = f'\n<link rel="canonical" href="{q.get("canonical") or (SITE + "/" + q["slug"] + "/")}">'
     (d / "index.html").write_text(PAGE.format(title=html.escape(q["title"], quote=False).replace("&amp;", "&amp;"), description=html.escape(q["description"], quote=True), canonical=can, fonts=FONTS, logo=LOGO, lead=q["lead"], config=q["config"], footer=FOOTER, assetv=ASSET_V), encoding="utf8")
 
 cards = "\n".join(f'<a href="{q["slug"]}/"><h3>{q["hub"]}</h3><p>{q["blurb"]}</p></a>' for q in QUIZZES)
@@ -173,7 +174,8 @@ HUB = f"""<!doctype html>
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Self-Check Quizzes — Vascular &amp; Vein Institute of the South</title>
-<meta name="robots" content="noindex,follow">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="{SITE}/">
 <meta name="description" content="Free two-minute self-checks from Vascular &amp; Vein Institute of the South: PAD, vein health, fibroids/UFE, aortic aneurysm screening, knee pain/GAE, carotid and stroke risk. No personal information collected.">
 {FONTS}
 <link rel="stylesheet" href="assets/quiz.css?v={ASSET_V}">
@@ -193,4 +195,10 @@ HUB = f"""<!doctype html>
 </html>
 """
 (ROOT / "index.html").write_text(HUB, encoding="utf8")
+import datetime
+today = datetime.date.today().isoformat()
+urls = [f"{SITE}/"] + [f"{SITE}/{q['slug']}/" for q in QUIZZES]
+(ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"<url><loc>{u}</loc><lastmod>{today}</lastmod></url>\n" for u in urls) + "</urlset>\n", encoding="utf8")
+(ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf8")
+(ROOT / "CNAME").write_text("quizzes.vascularandveininstitute.com\n", encoding="utf8")
 print("built", len(QUIZZES), "quizzes + hub")
