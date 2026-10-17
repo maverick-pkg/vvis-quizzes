@@ -106,7 +106,7 @@ dict(slug="ufe", title="Fibroids: Is UFE Right for Me?", hub="Fibroids &mdash; i
 dict(slug="aaa", title="Aortic Aneurysm Screening: Do I Qualify?", hub="Aortic aneurysm screening", blurb="Do you qualify for a one-time screening ultrasound? Five questions.",
  lead="Five questions. A one-time screening ultrasound is quick, painless and covered by Medicare for people who qualify.",
  description="Five-question check on whether you meet the recommendation for a one-time abdominal aortic aneurysm (AAA) screening ultrasound. Instant result, no personal information collected.",
- config=r"""window.VVIS_QUIZ={id:'aaa_quiz',learn:{label:'abdominal aortic aneurysm',url:'https://vascularandveininstitute.com/services/abdominal-aortic-aneurysm/'},questions:[
+ config=r"""window.VVIS_QUIZ={id:'aaa_quiz',sched:'https://z3-rpw.phreesia.net/selfscheduling.app/#/0975a5fd-a3c2-4811-826f-d5b94017b713?flowtypes=NewPatient&flowtypes=ReturningPatient&visittypes=306dda79-f370-4113-ba0b-39fe13d86a3c&newPatientQuestionSet=58d4cb13-a8d1-4aac-915a-ce72fb8c6b65&returningPatientQuestionSet=c2f77dd4-282a-4a02-ae4a-a66ff3b73d4c',learn:{label:'abdominal aortic aneurysm',url:'https://vascularandveininstitute.com/services/abdominal-aortic-aneurysm/'},questions:[
  {q:'How old are you?',help:'',opts:[['Under 60',0],['60 to 64',1],['65 to 75',2],['Over 75',1]]},
  {q:'What was your sex at birth?',help:'Screening recommendations differ for men and women.',opts:[['Male',1],['Female',0]]},
  {q:'Have you smoked at least 100 cigarettes in your lifetime?',help:'Even if you quit long ago.',opts:[['No',0],['Yes',2]]},
